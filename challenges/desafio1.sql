@@ -7,7 +7,7 @@ CREATE TABLE plans(
 	plan_id INT PRIMARY KEY AUTO_INCREMENT,
   plan_type VARCHAR(20) NOT NULL,
   plan_price REAL NOT NULL
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE users(
 	user_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -16,12 +16,12 @@ CREATE TABLE users(
   plan_id INT NOT NULL,
   register_date DATE NOT NULL,
   FOREIGN KEY (plan_id) REFERENCES plans (plan_id)    
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE artists(
 	artist_id INT PRIMARY KEY AUTO_INCREMENT,
   artist_name VARCHAR(50) NOT NULL
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE albums(
 	album_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -29,7 +29,7 @@ CREATE TABLE albums(
   artista_id INT NOT NULL,
   release_year INT NOT NULL,
   FOREIGN KEY (artista_id) REFERENCES artists (artist_id)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE musics(
 	music_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -37,7 +37,7 @@ CREATE TABLE musics(
   duration INT NOT NULL,
   album_id INT NOT NULL,
   FOREIGN KEY (album_id) REFERENCES albums (album_id)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE historic(
 	user_id INTEGER NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE historic(
 	CONSTRAINT PRIMARY KEY (user_id, music_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id),
   FOREIGN KEY (music_id) REFERENCES musics (music_id)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE follow(
 	user_id INTEGER NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE follow(
   CONSTRAINT PRIMARY KEY (user_id, artist_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id),
   FOREIGN KEY (artist_id) REFERENCES artists (artist_id)
-);
+) ENGINE = InnoDB;
 
 INSERT INTO plans(plan_type, plan_price)
 VALUES
